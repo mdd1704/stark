@@ -1,0 +1,74 @@
+version: "1.0"
+services:
+  mysql:
+    container_name: stark_mysql
+    image: mysql:latest
+    environment:
+      MYSQL_USER: stark
+      MYSQL_PASSWORD: stark
+      MYSQL_ROOT_PASSWORD: stark
+      MYSQL_DATABASE: stark
+    command: ["--log_bin_trust_function_creators=1"]
+    ports:
+      - 3307:3306
+    networks:
+      - stark_network
+  mongo:
+    image: mongo:latest
+    container_name: stark_mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: stark
+      MONGO_INITDB_ROOT_PASSWORD: stark
+      MONGO_INITDB_ROOT_DATABASE: stark
+    networks:
+      - stark_network
+  redis:
+    container_name: stark_redis
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      - stark_network
+  stark:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: stark_app
+    ports:
+      - 5000:5000
+      - 2200:22
+    depends_on:
+      - mysql
+      - redis
+      - mongo
+    environment:
+      - APP_MODE=debug
+      - SERVER_PORT=5000
+      - INTERNAL_ID=
+      - DB_USERNAME=stark
+      - DB_PASSWORD=stark
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=stark
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ACCESS_SECRET=accesskey
+      - REFRESH_SECRET=refreshkey
+      - MONGO_DATABASE=stark
+      - MONGO_PASSWORD=stark
+      - MONGO_PORT=27017
+      - MONGO_USERNAME=stark
+      - MONGO_HOST=mongo
+      - SMTP_SENDER=
+      - SMTP_EMAIL=
+      - SMTP_PASSWORD=
+      - SMTP_HOST=
+      - SMTP_PORT=587
+    networks:
+      - stark_network
+    restart: on-failure
+
+networks:
+  stark_network:

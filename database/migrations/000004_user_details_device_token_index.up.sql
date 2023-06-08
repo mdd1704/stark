@@ -1,0 +1,1 @@
+CREATE INDEX user_details_device_token_index USING HASH ON user_details (device_token);

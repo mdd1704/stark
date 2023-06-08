@@ -1,0 +1,26 @@
+[
+  {
+    "createIndexes": "profile_trails",
+    "indexes": [
+      {
+        "key": {
+          "transaction_id": 1
+        },
+        "name": "transaction_id_sort_by_asc_created"
+      },
+      {
+        "key": {
+          "user_id": 1
+        },
+        "name": "user_id_sort_by_asc_created"
+      },
+      {
+        "key": {
+          "created_at": 1
+        },
+        "name": "created_at_sort_by_asc_created",
+        "expireAfterSeconds": 2628000
+      }
+    ]
+  }
+]

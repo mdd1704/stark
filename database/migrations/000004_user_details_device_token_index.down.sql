@@ -1,0 +1,1 @@
+DROP INDEX user_details_device_token_index ON user_details;

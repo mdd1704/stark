@@ -1,0 +1,14 @@
+[
+  {
+    "dropIndexes": "profile_trails",
+    "index": "transaction_id_sort_by_asc_created"
+  },
+  {
+    "dropIndexes": "profile_trails",
+    "index": "user_id_sort_by_asc_created"
+  },
+  {
+    "dropIndexes": "profile_trails",
+    "index": "created_at_sort_by_asc_created"
+  }
+]

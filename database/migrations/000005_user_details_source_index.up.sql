@@ -1,0 +1,1 @@
+CREATE INDEX user_details_source_index USING HASH ON user_details (source);
